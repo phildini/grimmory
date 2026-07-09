@@ -3,6 +3,7 @@ import {FormsModule} from '@angular/forms';
 import {of, Subject} from 'rxjs';
 import {debounceTime, switchMap} from 'rxjs/operators';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {Router} from '@angular/router';
 import {InputText} from 'primeng/inputtext';
 import {Select} from 'primeng/select';
 import {Button} from 'primeng/button';
@@ -55,6 +56,7 @@ export class NotebookComponent implements OnInit {
   private readonly searchSubject = new Subject<void>();
   private readonly loadTrigger$ = new Subject<void>();
   private readonly bookFilterSubject = new Subject<string>();
+  private readonly router = inject(Router);
   private readonly notebookService = inject(NotebookService);
   private readonly urlHelper = inject(UrlHelperService);
   private readonly pageTitle = inject(PageTitleService);
@@ -218,6 +220,13 @@ export class NotebookComponent implements OnInit {
       case 'BOOKMARK': return 'pi pi-bookmark';
       default: return 'pi pi-circle';
     }
+  }
+
+  openEntry(entry: NotebookEntry): void {
+    if (!entry.cfi) return;
+    this.router.navigate(['/ebook-reader/book', entry.bookId], {
+      queryParams: {cfi: entry.cfi},
+    });
   }
 
   getTypeLabel(type: string): string {

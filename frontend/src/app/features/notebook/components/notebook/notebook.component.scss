@@ -255,6 +255,15 @@
   border-left: 3px solid var(--p-primary-color);
   background: var(--color-card);
   transition: background 0.15s ease;
+  cursor: default;
+
+  &.clickable {
+    cursor: pointer;
+
+    &:hover {
+      background: color-mix(in srgb, var(--p-primary-color) 8%, transparent);
+    }
+  }
 
   &:hover {
     background: color-mix(in srgb, var(--color-card) 92%, var(--color-text) 8%);

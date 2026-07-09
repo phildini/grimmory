@@ -159,7 +159,12 @@
                 @for (entry of group.entries; track entry.id + '-' + entry.type) {
                   <div
                     class="entry-item"
+                    [class.clickable]="!!entry.cfi"
                     [style.border-left-color]="entry.color || 'var(--p-primary-color)'"
+                    (click)="openEntry(entry)"
+                    role="button"
+                    [tabindex]="entry.cfi ? 0 : -1"
+                    (keydown.enter)="openEntry(entry)"
                   >
                     <div class="entry-top-row">
                       <div class="entry-type-badge" [class]="'type-' + entry.type.toLowerCase()">

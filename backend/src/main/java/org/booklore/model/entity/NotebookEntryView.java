@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @Entity
 @Immutable
-@Subselect("""
+    @Subselect("""
     SELECT a.id * 3 AS id,
            a.id AS original_id,
            'HIGHLIGHT' AS entry_type,
@@ -24,6 +24,7 @@ import java.time.LocalDateTime;
            a.color,
            a.style,
            a.chapter_title,
+           a.cfi,
            (SELECT bf.book_type FROM book_file bf WHERE bf.book_id = a.book_id ORDER BY bf.id LIMIT 1) AS primary_book_type,
            bm.cover_updated_on,
            a.created_at,
@@ -42,6 +43,7 @@ import java.time.LocalDateTime;
            n.color,
            NULL,
            n.chapter_title,
+           n.cfi,
            (SELECT bf.book_type FROM book_file bf WHERE bf.book_id = n.book_id ORDER BY bf.id LIMIT 1),
            bm.cover_updated_on,
            n.created_at,
@@ -60,6 +62,7 @@ import java.time.LocalDateTime;
            b.color,
            NULL,
            NULL,
+           b.cfi,
            (SELECT bf.book_type FROM book_file bf WHERE bf.book_id = b.book_id ORDER BY bf.id LIMIT 1),
            bm.cover_updated_on,
            b.created_at,
@@ -102,6 +105,9 @@ public class NotebookEntryView {
 
     @Column(name = "chapter_title")
     private String chapterTitle;
+
+    @Column(name = "cfi")
+    private String cfi;
 
     @Column(name = "primary_book_type")
     private String primaryBookType;

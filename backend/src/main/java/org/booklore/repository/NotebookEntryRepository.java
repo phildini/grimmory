@@ -24,6 +24,7 @@ public interface NotebookEntryRepository extends Repository<NotebookEntryView, L
         String getColor();
         String getStyle();
         String getChapterTitle();
+        String getCfi();
         String getPrimaryBookType();
         LocalDateTime getCreatedAt();
         LocalDateTime getUpdatedAt();
@@ -51,6 +52,7 @@ public interface NotebookEntryRepository extends Repository<NotebookEntryView, L
                    ne.color as color,
                    ne.style as style,
                    ne.chapterTitle as chapterTitle,
+                   ne.cfi as cfi,
                    ne.primaryBookType as primaryBookType,
                    ne.createdAt as createdAt,
                    ne.updatedAt as updatedAt

@@ -261,6 +261,10 @@ export class EbookReaderComponent implements OnInit {
           switchMap(() => {
             if (!this.hasLoadedOnce) {
               this.hasLoadedOnce = true;
+              const targetCfi = this.route.snapshot.queryParamMap.get('cfi');
+              if (targetCfi) {
+                return this.viewManager.goTo(targetCfi);
+              }
               return this.restoreSavedPosition(book);
             }
             return of(undefined);
