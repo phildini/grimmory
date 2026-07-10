@@ -18,6 +18,21 @@ describe('notebook.model', () => {
     expectTypeOf(entry.updatedAt).toEqualTypeOf<string | undefined>();
   });
 
+  it('may carry an optional cfi for ebook reader navigation', () => {
+    const entry: NotebookEntry = {
+      id: 7,
+      type: 'HIGHLIGHT',
+      bookId: 12,
+      bookTitle: 'The Dispossessed',
+      text: 'True journey is return',
+      cfi: 'epubcfi(/6/4[chap05]!/4[body]/14[para10],/1:0,/1:78)',
+      createdAt: '2026-03-26T10:00:00Z'
+    };
+
+    expect(entry.cfi).toBeDefined();
+    expectTypeOf(entry.cfi).toEqualTypeOf<string | undefined>();
+  });
+
   it('captures paged notebook results and book options', () => {
     const page: NotebookPage = {
       content: [],
